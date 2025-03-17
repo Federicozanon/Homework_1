@@ -7,7 +7,7 @@
 #include <fstream>
 using namespace std;
 
-typedef enum Nivel_importancia{
+enum Nivel_importancia{
     DEBUG, INFO, WARNING, ERROR, CRITICAL
 };
 
@@ -15,7 +15,7 @@ struct nodo{
     unique_ptr<nodo> next; 
     int value;
 
-    nodo(int val) : value(val), next(nullptr) {}
+    nodo(int val) : next(nullptr), value(val) {}
 
 };
 struct lista{
