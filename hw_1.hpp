@@ -8,7 +8,7 @@
 using namespace std;
 
 enum Nivel_importancia{
-    DEBUG, INFO, WARNING, ERROR, CRITICAL
+    DEBUG, INFO, WARNING, ERROR, CRITICAL //SECURITY
 };
 
 struct nodo{
