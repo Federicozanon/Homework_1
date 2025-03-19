@@ -8,8 +8,19 @@
 using namespace std;
 
 enum Nivel_importancia{
-    DEBUG, INFO, WARNING, ERROR, CRITICAL
+    SECURITY, DEBUG, INFO, WARNING, ERROR, CRITICAL
 };
+
+string funcion_nivel(Nivel_importancia nivel){
+    switch (nivel){
+        case DEBUG : return "DEBUG";
+        case INFO : return "INFO";
+        case WARNING : return "WARNING";
+        case ERROR : return "ERROR";
+        case CRITICAL : return "CRITICAL";
+        default : return "UNKNOWN";
+    }
+}
 
 struct nodo{
     unique_ptr<nodo> next; 
@@ -48,27 +59,30 @@ int ejercicio1b(int n){
 //EJERCICIO 2
 
 void logMessage(string mensaje, Nivel_importancia nivel){
-    ofstream archivo("ej2_archivo_salida.txt");
+    ofstream archivo("ej2_archivo_salida.txt", ios::app);
     if (archivo.is_open()){
-        archivo<<"["<<nivel<<"] <"<<mensaje<<">\n";
+        archivo<<"["<<funcion_nivel(nivel)<<"] <"<<mensaje<<">\n";
+        archivo.close();
     }
     else{
         cerr<<"Error abriendo el achivo";
     }
 }
 void logMessage(string mensaje_de_error, string archivo, int linea_de_codigo){
-    ofstream archivo1("ej2_archivo_salida.txt");
+    ofstream archivo1("ej2_archivo_salida.txt", ios::app);
     if (archivo1.is_open()){
         archivo1<<"In "<<archivo<<"\nLine "<<linea_de_codigo<<"\nError: "<<mensaje_de_error;
+        archivo1.close();
     }
     else{
         cerr<<"Error abriendo el archivo";
     }
 }
 void logMessage(string mensaje_de_acceso, string nombre_usuario){
-    ofstream archivo2("ej2_arhcivo_salida.txt");
+    ofstream archivo2("ej2_archivo_salida.txt", ios::app);
     if (archivo2.is_open()){
-        archivo2<<"[SECURITY] user: "<< nombre_usuario<<" "<<mensaje_de_acceso;
+        archivo2<<"[SECURITY] user: "<< nombre_usuario<<" "<<mensaje_de_acceso<<" ";
+        archivo2.close();
     }
     else{
         cerr<<"Error abriendo el archivo";
@@ -81,19 +95,23 @@ void prueba_ejercicio_2a(){
     logMessage("Error al acceder a PATH",ERROR);
     logMessage("Se han superado las 10000000 iteraciones, deteniendo el programa",CRITICAL);
 }
-void prueba_ejercicio_2b(){
+int prueba_ejercicio_2b(){
     try{
         int numerador = 1;
         logMessage("Access Granted", "Federico Zanon");
         int denominador = 0;
         if (denominador == 0){
-            throw "Division por cero";
+            throw runtime_error("Division por cero ");
         }
         int resultado = numerador/denominador;  
+        cout<<"El resultado es: "<<resultado;
     }
-    catch(const char* e){
-        cout<<"Error: "<<e;
+    catch(const exception& e){
+        logMessage(e.what(),"hw_1.cpp", __LINE__);
+        cout<<"Error al ejecutar la funcion"<<e.what();
+        return 1;
     }
+    return 0;
 }
 
 
@@ -131,7 +149,7 @@ int push_back(lista *lista_ejemplo, unique_ptr<nodo> nuevo_nodo){
 
 int insert(lista* lista_ejemplo, unique_ptr<nodo> nuevo_nodo, long unsigned int pos_lista){
     if(pos_lista<0 || pos_lista>lista_ejemplo->size-1){
-        cout<<"la posicion de la lista es invalida";
+        cout<<"la posicion de la lista es invalida\n";
         return 1;
     }
     if (pos_lista==0){
@@ -149,7 +167,7 @@ int insert(lista* lista_ejemplo, unique_ptr<nodo> nuevo_nodo, long unsigned int 
             i++;
         }
         if(pos_lista>=lista_ejemplo->size){
-            cout<<"Se ha superado el largo de la lista, se insertara el nodo al final";
+            cout<<"Se ha superado el largo de la lista, se insertara el nodo al final\n";
         }
         nuevo_nodo->next = move(actual->next);
         actual->next = move(nuevo_nodo);
@@ -163,7 +181,7 @@ int insert(lista* lista_ejemplo, unique_ptr<nodo> nuevo_nodo, long unsigned int 
 
 int erase(lista* lista_ejemplo, long unsigned int pos_lista){
     if(pos_lista<0 || lista_ejemplo->size==0){
-        cout<<"la posicion de la lista es invalida o la lista esta vacia";
+        cout<<"la posicion de la lista es invalida o la lista esta vacia\n";
         return 1;
     }
     if (pos_lista==0){
@@ -181,7 +199,7 @@ int erase(lista* lista_ejemplo, long unsigned int pos_lista){
         }
         
         if (pos_lista>=lista_ejemplo->size){
-            cout<<"Se ha superado el largo de la lista, se borrara el ultimo nodo";
+            cout<<"Se ha superado el largo de la lista, se borrara el ultimo nodo\n";
         }
         actual->next = nullptr;
         lista_ejemplo->tail = actual;
@@ -194,7 +212,7 @@ int print_list(lista *lista_ejemplo){
     cout<<"Lista completa: \n";
     nodo* actual = lista_ejemplo->head.get();
     while(actual!=nullptr){
-        cout<<lista_ejemplo->head->value<<" -> ";
+        cout<<actual->value<<" -> ";
         actual = actual->next.get(); 
     }
     cout<<"NULL\n";
@@ -207,12 +225,12 @@ int ejemplo_uso_lista(){
     print_list(&ejemplo_lista);
 
     cout<<"Agrego nodos con push_front\n";
-    push_front(&ejemplo_lista, create_node(10));
-    push_front(&ejemplo_lista, create_node(20));
-    push_front(&ejemplo_lista, create_node(30));
     push_front(&ejemplo_lista, create_node(40));
+    push_front(&ejemplo_lista, create_node(30));
+    push_front(&ejemplo_lista, create_node(20));
+    push_front(&ejemplo_lista, create_node(10));
     print_list(&ejemplo_lista);
-
+    
     cout<<"Agrego nodos con push_back\n";
     push_back(&ejemplo_lista, create_node(50));
     push_back(&ejemplo_lista, create_node(60));
@@ -220,20 +238,20 @@ int ejemplo_uso_lista(){
     push_back(&ejemplo_lista, create_node(80));
     print_list(&ejemplo_lista);
     
-    cout<<"Agrego nodos usando insert";
+    cout<<"Agrego nodos usando insert\n";
     insert(&ejemplo_lista, create_node(15), 1);
-    insert(&ejemplo_lista, create_node(35), 3);
-    insert(&ejemplo_lista, create_node(55), 5);
-    insert(&ejemplo_lista, create_node(75), 7);
+    insert(&ejemplo_lista, create_node(35), 4);
+    insert(&ejemplo_lista, create_node(55), 7);
+    insert(&ejemplo_lista, create_node(75), 10);
     print_list(&ejemplo_lista);
 
-    cout<<"elimino nodos con erase";
+    cout<<"elimino nodos con erase\n";
     erase(&ejemplo_lista, 2);
     erase(&ejemplo_lista, 4);
     erase(&ejemplo_lista, 6);
     erase(&ejemplo_lista, 8);
     print_list(&ejemplo_lista);
-
+    
     return 0;
 }
 
@@ -255,5 +273,11 @@ int main(){
         }
         
     }
+    prueba_ejercicio_2a();
+
+    prueba_ejercicio_2b();
+
+    ejemplo_uso_lista();
+
     return 0;
 }

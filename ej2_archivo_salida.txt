@@ -1,0 +1,8 @@
+[DEBUG] <Iniciando Valgrind>
+[INFO] <Se ha completado la prueba 1>
+[WARNING] <El archivo 'hola.txt' no se ha encontrado>
+[ERROR] <Error al acceder a PATH>
+[CRITICAL] <Se han superado las 10000000 iteraciones, deteniendo el programa>
+[SECURITY] user: Federico Zanon Access Granted In hw_1.cpp
+Line 110
+Error: Division por cero 
