@@ -1,5 +1,7 @@
 # Homework_1
 Homework_1 Paradigmas
+
+
 Compilacion ej1
 //g++ hw_1_ej1.cpp -Wall -g -o ej1
 //valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./ej1
