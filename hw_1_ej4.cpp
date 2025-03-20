@@ -3,10 +3,6 @@
 #include <cstring>
 using namespace std;
 
-//valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./ej4
-//g++ hw_1_ej3.cpp -Wall -g -o ej4
-
-
 bool comparador_de_strings(string string_1, string string_2, long unsigned int indice = 0){
     if(indice>= string_1.length() || indice>=string_2.length() || string_1[indice]!= string_2[indice]){
         cout<<"Los dos strings no son iguales\n";

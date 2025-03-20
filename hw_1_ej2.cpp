@@ -2,9 +2,6 @@
 #include <fstream>
 using namespace std;
 
-//valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./ej2
-//g++ hw_1_ej2.cpp -Wall -g -o ej2
-
 enum Nivel_importancia{
     DEBUG, INFO, WARNING, ERROR, CRITICAL
 };

@@ -2,9 +2,6 @@
 #include <iostream>
 using namespace std;
 
-//valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./ej3
-//g++ hw_1_ej3.cpp -Wall -g -o ej3
-
 struct nodo{
     unique_ptr<nodo> next; 
     int value;

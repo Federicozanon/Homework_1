@@ -2,10 +2,6 @@
 #include <vector>
 using namespace std;
 
-//valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./ej1
-//g++ hw_1_ej1.cpp -Wall -g -o ej1
-
-
 vector<vector<int>> ejercicio1a(int n){
     vector<vector<int>> matriz(n,vector<int>(n));
     for(int i=0; i<n*n;i++){
@@ -20,8 +16,6 @@ int ejercicio1b(int n){
     }
     return 0;
 }
-
-
 
 int main(){
     int n;
