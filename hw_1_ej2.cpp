@@ -7,6 +7,7 @@ enum Nivel_importancia{
 };
 
 string funcion_nivel(Nivel_importancia nivel){
+    //usando esta funcion, paso el nivel (int) a un string
     switch (nivel){
         case DEBUG : return "DEBUG";
         case INFO : return "INFO";
@@ -18,6 +19,7 @@ string funcion_nivel(Nivel_importancia nivel){
 }
 
 void logMessage(string mensaje, Nivel_importancia nivel){
+    //imprimo al final de ej2_archivo_salida el mensaje
     ofstream archivo("ej2_archivo_salida.txt", ios::app);
     if (archivo.is_open()){
         archivo<<"["<<funcion_nivel(nivel)<<"] <"<<mensaje<<">\n";
@@ -28,6 +30,7 @@ void logMessage(string mensaje, Nivel_importancia nivel){
     }
 }
 void logMessage(string mensaje_de_error, string archivo, int linea_de_codigo){
+    //imprimo al final de ej2_archivo_salida el mensaje junto con la linea y el archivo donde sucedio el error
     ofstream archivo1("ej2_archivo_salida.txt", ios::app);
     if (archivo1.is_open()){
         archivo1<<"In "<<archivo<<"\nLine "<<linea_de_codigo<<"\nError: "<<mensaje_de_error;
@@ -55,6 +58,9 @@ void prueba_ejercicio_2a(){
     logMessage("Se han superado las 10000000 iteraciones, deteniendo el programa",CRITICAL);
 }
 int prueba_ejercicio_2b(){
+    /*uso try y throw para agarrar el error, 
+    para luego con catch tomar el error e imprimirlo en ej2_archivo_salida y retorno 1
+    */
     try{
         int numerador = 1;
         logMessage("Access Granted", "Federico Zanon");

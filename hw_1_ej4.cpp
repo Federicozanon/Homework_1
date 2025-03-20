@@ -38,8 +38,6 @@ void tiempo_ejecucion(){
     auto elapsedTime2 = chrono::duration_cast<chrono::nanoseconds>(endTime2 - startTime2); 
     cout<<"A mi comparador_de_strings_mejorado le tomó: "<<elapsedTime2.count()<<" nanosegundos\n";
 }
-
-
 int main(){
     cout<<"EJERCICIO 4): \n";
     tiempo_ejecucion();
