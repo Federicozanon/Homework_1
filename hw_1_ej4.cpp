@@ -49,6 +49,11 @@ void tiempo_ejecucion(){
     cout<<"A mi comparador_de_strings_mejorado le tomó: "<<elapsedTime2.count()<<" nanosegundos\n";
 }
 int main(){
+    /*La diferencia en los tiempos de compilacion de las dos funciones
+    se debe a que al usar constexpr, yo declaro que las variables, funciones y/o
+    objetos se pueden evaluar en tiempo de compilacion, lo que reduce el tiempo
+    que tarda la funcion en completarse.
+    */
     cout<<"EJERCICIO 4): \n";
     tiempo_ejecucion();
     return 0;
