@@ -5,7 +5,6 @@ using namespace std;
 enum Nivel_importancia{
     DEBUG, INFO, WARNING, ERROR, CRITICAL
 };
-
 string funcion_nivel(Nivel_importancia nivel){
     //usando esta funcion, paso el nivel (int) a un string
     switch (nivel){
@@ -17,7 +16,6 @@ string funcion_nivel(Nivel_importancia nivel){
         default : return "UNKNOWN";
     }
 }
-
 void logMessage(string mensaje, Nivel_importancia nivel){
     //imprimo al final de ej2_archivo_salida el mensaje
     ofstream archivo("ej2_archivo_salida.txt", ios::app);
@@ -59,7 +57,7 @@ void prueba_ejercicio_2a(){
 }
 int prueba_ejercicio_2b(){
     /*uso try y throw para agarrar el error, 
-    para luego con catch tomar el error e imprimirlo en ej2_archivo_salida y retorno 1
+    para luego con catch tomar el error e imprimirlo en ej2_archivo_salida y retorno 1.
     */
     try{
         int numerador = 1;
@@ -77,7 +75,6 @@ int prueba_ejercicio_2b(){
     }
     return 0;
 }
-
 int main(){
     logMessage("EJERCICIO 2a: ", INFO);
     prueba_ejercicio_2a();
