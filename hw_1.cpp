@@ -10,7 +10,7 @@
 using namespace std;
 
 enum Nivel_importancia{
-    SECURITY, DEBUG, INFO, WARNING, ERROR, CRITICAL
+    DEBUG, INFO, WARNING, ERROR, CRITICAL
 };
 
 string funcion_nivel(Nivel_importancia nivel){
@@ -39,7 +39,7 @@ struct lista{
 };
 
 //valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./tuto
-
+//g++ hw_1.cpp -Wall -g -o tuto
 //EJERCICIO 1
 
 vector<vector<int>> ejercicio1a(int n){
@@ -67,7 +67,7 @@ void logMessage(string mensaje, Nivel_importancia nivel){
         archivo.close();
     }
     else{
-        cerr<<"Error abriendo el achivo";
+        cerr<<"Error abriendo el achivo\n";
     }
 }
 void logMessage(string mensaje_de_error, string archivo, int linea_de_codigo){
@@ -77,7 +77,7 @@ void logMessage(string mensaje_de_error, string archivo, int linea_de_codigo){
         archivo1.close();
     }
     else{
-        cerr<<"Error abriendo el archivo";
+        cerr<<"Error abriendo el archivo\n";
     }
 }
 void logMessage(string mensaje_de_acceso, string nombre_usuario){
@@ -87,7 +87,7 @@ void logMessage(string mensaje_de_acceso, string nombre_usuario){
         archivo2.close();
     }
     else{
-        cerr<<"Error abriendo el archivo";
+        cerr<<"Error abriendo el archivo\n";
     }
 }
 void prueba_ejercicio_2a(){
@@ -293,7 +293,6 @@ void tiempo_ejecucion(){
     auto endTime2 = chrono::high_resolution_clock::now(); 
     auto elapsedTime2 = chrono::duration_cast<chrono::nanoseconds>(endTime2 - startTime2); 
     cout<<"A mi comparador_de_strings_mejorado le tomó: "<<elapsedTime2.count()<<" nanosegundos\n";
-    
 }
 
 
@@ -301,8 +300,9 @@ int main(){
     int n;
     cout<<"ingrese el valor de n: ";
     cin>>n;
+    cout<<"EJERCICIO 1) a: \n";
     vector<vector<int>> matriz = ejercicio1a(n);
-
+    cout<< "EJERCICIO 1) b: \n";
     ejercicio1b(n);
     
     for (int i=0;i<n*n;i++){
@@ -312,12 +312,13 @@ int main(){
         }
         
     }
+    cout<<"EJERCICIO 2) a: \n";
     prueba_ejercicio_2a();
-
+    cout<<"EJERCICIO 2) b: \n";
     prueba_ejercicio_2b();
-
+    cout<<"EJERCICIO 3): \n";
     ejemplo_uso_lista();
-
+    cout<<"EJERCICIO 4): \n";
     tiempo_ejecucion();
     
     return 0;
